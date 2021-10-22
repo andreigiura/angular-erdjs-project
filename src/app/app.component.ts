@@ -13,7 +13,7 @@ export class AppComponent {
   accountAddress =
     'erd1rvzyd3ex5ljll22jmvw8kpugv032fndemv69pg8p5qm42d009n6sr7mytc';
 
-  async login() {
+  async signMessage() {
     let provider = ERDJS.ExtensionProvider.getInstance().setAddress(
       this.accountAddress
     );
