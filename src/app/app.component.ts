@@ -10,20 +10,19 @@ const ERDJS = require('../assets/erdjs');
 })
 export class AppComponent {
   title = 'erdjs-angular';
-  signToken = 'ssss';
 
   async login() {
     let provider = ERDJS.ExtensionProvider.getInstance();
     await provider.init();
-    await provider.login('', this.signToken);
+    await provider.login();
     const { signature, address } = provider.account;
 
     let toBeValidated = new ERDJS.SignableMessage({
-      message: Buffer.from(`${address}${this.signToken}{}`),
+      message: Buffer.from(`${address}{}`),
       address: new ERDJS.Address(address),
       signature: new Signature(signature)
     });
-    console.log(toBeValidated);
+
     let verifier = ERDJS.UserVerifier.fromAddress(new ERDJS.Address(address));
     console.log('is signature valid: ', verifier.verify(toBeValidated));
   }
